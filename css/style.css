@@ -1,0 +1,797 @@
+/* ============================================================
+   oriol colomer — hoja de estilo unica
+   Todo en Helvetica. Escala de grises. Sin sombras, sin bordes,
+   sin radios: la jerarquia la hace el tamano y el gris.
+   ============================================================ */
+
+/* Sin ficheros de fuente: Helvetica es de pago (Monotype) y servirla desde
+   aqui pide una licencia web. Se usa la del sistema: en Mac e iOS es
+   Helvetica de verdad; en Windows y Android cae a Arial, que casi no se
+   distingue. De paso la pagina no baja ni un byte de tipografia. */
+
+:root{
+  --bg:        #fafafa;
+  --ink:       #737373;   /* cuerpo de texto: 4,5 sobre --bg, el minimo AA */
+  --ink-soft:  #919191;   /* titulos, secundario: 3 sobre --bg */
+  --ink-faint: #c4c4c4;   /* inactivo, lab */
+  --ink-hard:  #646464;   /* activo, roles en bold */
+
+  --btn-subtle:       rgba(0,0,0,.30);
+  --btn-subtle-hover: rgba(0,0,0,.60);
+
+  --linea:      #ececec;              /* rayas de la lista */
+  --hueco:      #f0f0f0;              /* lo que se ve antes de que cargue una foto */
+  --caja:       #fff;                 /* los menus desplegables */
+  --caja-borde: #e9e9e9;
+  --luz:        #fff;                 /* el brillo de la bola */
+  --dot-rgb:    226,226,226;          /* los puntos del fondo (js/bg.js) */
+
+  --edge-x: 3dvw;                      /* separacion de los botones al borde */
+  /* Abajo se suma la zona segura: en un iPhone sin boton la barra del
+     tiempo y los idiomas caian encima de la raya de inicio. La pagina va
+     con viewport-fit=cover, asi que esto hay que ponerlo a mano. */
+  --edge-y: calc(3dvh + env(safe-area-inset-bottom, 0px));
+  --safe-top: env(safe-area-inset-top, 0px);
+
+  /* La bola: el punto de la linea del tiempo, el pomo, la pupila del ojo
+     y el favicon son la misma pieza. Luz arriba a la izquierda. */
+  --bola:        radial-gradient(circle at 34% 30%, var(--luz) 0%, var(--ink-soft) 80%);
+  --bola-activa: radial-gradient(circle at 34% 30%, var(--luz) 0%, var(--ink) 82%);
+
+  --pad:   clamp(20px, 3.2vw, 52px);   /* margen exterior */
+  /* Arriba la cabecera va mas pegada que a los lados: con --pad tambien
+     arriba, en una pantalla grande el menu caia a 52px del borde y se leia
+     descolgado, como si fuera parte del contenido. */
+  --pad-top: clamp(16px, 1.6vw, 28px);
+  /* El alto de la barra de arriba (.nav): su relleno mas un renglon. Lo usa
+     el bloque del texto del proyecto para llegar justo al pie de pantalla. */
+  --nav-alto: calc(var(--pad-top) + var(--safe-top) + var(--fila) + var(--pad));
+  --gap:   clamp(24px, 4vw, 72px);     /* separacion entre columnas */
+  /* El alto del renglon de arriba, igual en todas las paginas y para todo
+     lo que va en el: enlaces, desplegables e iconos. Si cada cosa trae su
+     alto, el menu baja o sube un pixel segun lo que le acompana. */
+  --fila: 1.5rem;
+
+  --fs-nav:   clamp(14px, 1.05vw, 17px);
+  --fs-body:  clamp(14px, 1.02vw, 16px);
+  --fs-meta:  clamp(12px, .92vw, 14px);
+  --fs-title: clamp(30px, 4.4vw, 62px);
+
+  --lh: 1.45;
+
+  /* Aire minimo entre bloques de una misma columna: texto, ficha tecnica y
+     paginacion nunca se pegan, por corta que sea la media del proyecto. */
+  --aire: clamp(44px, 5vw, 96px);
+
+  /* La entrada al tunel: la pupila parpadea y la portada se funde.
+     welcome.js lee estos dos valores para saber cuando navegar. */
+  --parpadeo: 260ms;
+  --fundido:  480ms;
+
+  font-size: 16px;
+}
+
+/* Modo oscuro: el mismo gris sobre gris, del reves. Cada tinta queda a la
+   misma distancia del fondo que en claro, asi que la jerarquia no cambia.
+   La clase la pone el <head> antes de pintar (ver paginas.mjs): la que se
+   eligio con el boton o, si nunca se ha tocado, la del sistema. */
+html.oscuro{
+  color-scheme: dark;
+  --bg:        #151515;
+  --ink:       #929292;
+  --ink-soft:  #696969;
+  --ink-faint: #4b4b4b;
+  --ink-hard:  #ababab;
+  --btn-subtle:       rgba(255,255,255,.30);
+  --btn-subtle-hover: rgba(255,255,255,.60);
+  --linea:      #252525;
+  --hueco:      #1e1e1e;
+  --caja:       #1c1c1c;
+  --caja-borde: #2b2b2b;
+  --luz:        #d6d6d6;
+  --dot-rgb:    46,46,46;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  margin:0;
+  min-height:100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family:Helvetica, 'Helvetica Neue', Arial, sans-serif;
+  font-weight:400;
+  font-size: var(--fs-body);
+  line-height: var(--lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+a{ color:inherit; text-decoration:none; }
+a:hover{ color: var(--ink-hard); }
+img{ max-width:100%; display:block; }
+
+/* Se lee pero no se ve: el h1 de work, que la barra de arriba ya cuenta
+   visualmente pero un buscador o un lector de pantalla necesitan igual. */
+.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+
+/* ---------- fondo de puntos ------------------------------- */
+/* Lo pinta js/bg.js: una trama de puntos sobre blanco cuyo radio sale
+   de un mapa de altura que se desplaza. Capa fija detras de todo: en
+   la referencia el halftone es papel, no contenido. */
+.dots{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+}
+
+/* ============================================================
+   NAV
+   Una sola barra, la misma en todas las paginas interiores:
+   work / about / lab a la izquierda. La landing no la lleva.
+   ============================================================ */
+.nav{
+  position:relative; z-index:2; line-height: var(--fila);
+  padding: calc(var(--pad-top) + var(--safe-top)) var(--pad) var(--pad);
+  font-size: var(--fs-nav);
+  color: var(--ink-soft);
+}
+.nav a{ color: var(--ink-soft); }
+.nav a:hover{ color: var(--ink-hard); }
+.nav [aria-current="page"]{ color: var(--ink-hard); font-weight:700; }
+/* cada seccion guarda el ancho de su version en negrita (un fantasma
+   invisible debajo): si no, al cambiar de pagina la activa engorda y
+   empuja a las de su derecha unos pixeles */
+.nav a[data-t]{ display:flex; flex-direction:column; }
+.nav a[data-t]::after{ content:attr(data-t); font-weight:700; height:0; overflow:hidden; visibility:hidden; }
+/* dentro de un proyecto, su nombre en el sitio de "work": si es muy largo
+   se corta, que la barra es un renglon */
+.nav .aqui{ max-width:42ch; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.nav--inline{ display:flex; align-items:baseline; gap:.5ch; }
+.nav--inline .sep{ color: var(--ink-faint); }
+
+/* ---------- idioma, letra y tema --------------------------- */
+/* Color por alfa (asi funciona sobre cualquier fondo) y el activo solo
+   por peso. */
+.langs{
+  position:fixed; right: var(--edge-x); bottom: var(--edge-y); z-index:3;
+  display:flex; align-items:center; gap:.3rem;
+}
+.langs .idioma, .langs .tipo, .langs .tema{
+  /* los tres (idioma, letra y tema) igual de altos; letra y tema, cuadrados */
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:1.4rem; height:1.5rem; padding:0; flex:none;
+  font:inherit; font-size:.8rem; line-height:1;
+  background:none; border:0; cursor:pointer; color: var(--btn-subtle); transition: color .2s ease;
+}
+/* se ven pequenos, pero se pulsan en 44px de alto (y hasta el vecino) */
+.langs .idioma::before, .langs .tipo::before, .langs .tema::before{
+  content:''; position:absolute; left:50%; top:50%; translate:-50% -50%;
+  width:calc(100% + .3rem); height:44px;
+}
+.langs .idioma:hover, .langs .tipo:hover, .langs .tema:hover{ color: var(--btn-subtle-hover); }
+.langs .tipo[aria-pressed="true"]{ color: var(--ink-hard); }
+
+/* los iconos: dibujos negros sobre transparente (assets/iconos/) usados
+   de mascara, asi toman el color del boton en claro y en oscuro */
+.langs .ico, .vistas .ico{
+  display:block; width:1rem; height:1rem; background:currentColor;
+  -webkit-mask: var(--i) center / contain no-repeat; mask: var(--i) center / contain no-repeat;
+}
+.langs .ojo{ --i:url(../assets/iconos/text.png); }
+.langs .mano{ --i:url(../assets/iconos/wing-bold.png); }
+.langs .sol{ --i:url(../assets/iconos/bright.png); }
+.langs .luna{ --i:url(../assets/iconos/dark.png); }
+.langs .tipo[aria-pressed="true"] .ojo,
+.langs .tipo[aria-pressed="false"] .mano{ display:none; }
+
+/* idioma: el codigo del actual, en minusculas como el resto de titulos */
+.langs .idioma{ padding:0 .15rem; text-decoration:none; }
+
+/* sol y luna uno encima del otro, se funden al conmutar (y el boton da
+   una vuelta, ver js/ajustes.js). Igual que en meowrhino.studio */
+.langs .tema .ico{ position:absolute; inset:0; margin:auto; transition: opacity .4s ease; }
+.langs .tema .luna, .langs .tema[aria-pressed="true"] .sol{ opacity:0; }
+.langs .tema[aria-pressed="true"] .luna{ opacity:1; }
+.langs [hidden]{ display:none; }
+
+/* Wingdings en toda la web, menos en lo que hace falta para volver: los
+   idiomas y el propio boton. Todo en mayusculas: en Wingdings son los
+   simbolos que gustan (manos, signos del zodiaco...). */
+/* Wingdings pequena se emborrona: dos px mas en la letra de texto, menu y datos. */
+html.wingdings{
+  --fs-nav:  clamp(16px, calc(1.05vw + 2px), 19px);
+  --fs-body: clamp(16px, calc(1.02vw + 2px), 18px);
+  --fs-meta: clamp(14px, calc(.92vw + 2px), 16px);
+}
+html.wingdings body{ font-family: Wingdings, Helvetica, 'Helvetica Neue', Arial, sans-serif; text-transform:uppercase; }
+html.wingdings .langs, html.wingdings .langs *{ font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif; text-transform:none; }
+
+/* ============================================================
+   LANDING
+   ============================================================ */
+.landing{ min-height:100dvh; display:flex; flex-direction:column; }
+.landing .nav{ flex:0 0 auto; }
+/* Sin "click anywhere": clicar en cualquier sitio entra, y si nadie hace
+   nada se entra solo a los pocos segundos (welcome.js). */
+.landing .hero{
+  flex:1 1 auto; position:relative; cursor:pointer;
+  display:grid; justify-items:center; align-content:center;
+  gap: clamp(20px, 3.6vh, 38px);
+  padding: var(--pad);
+}
+
+.eye{ display:grid; place-items:center; gap: clamp(14px,2vw,26px); }
+.eye .lens{
+  position:relative;
+  width: clamp(120px, 11vw, 168px);
+  aspect-ratio: 160 / 102;
+}
+.eye .shape{
+  position:absolute; inset:0;
+  /* de --ink-soft a --ink: el ojo es lo unico que hay en la portada y se
+     quedaba mas palido que su propio pie de foto */
+  background: var(--ink);
+  -webkit-mask: url('../assets/eye_shape.png') center/contain no-repeat;
+          mask: url('../assets/eye_shape.png') center/contain no-repeat;
+}
+/* La pupila es la bola, pero con brillo: un punto blanco nitido arriba a
+   la izquierda. Con solo la bola (luz difusa) el ojo se veia muerto
+   (Oriol, 2026-10). El fondo es mas hondo que la bola para que el punto
+   se lea; el brillo de antes era difuso y tampoco se leia.
+
+   La mueve welcome.js con un muelle (translate), asi que no lleva
+   transicion de posicion: arranca y frena sola, en curva. El parpadeo es
+   solo suyo —se aplasta en vertical— y el contorno del ojo no se toca. */
+.eye .pupil{
+  position:absolute; left:50%; top:50%;
+  width:43.75%;                       /* 70/160, la proporcion real del ojo */
+  aspect-ratio:1; border-radius:50%;
+  translate:-50% -50%;
+  background:
+    radial-gradient(circle at 32% 28%, #fff 0 11%, transparent 12.5%),
+    radial-gradient(circle at 40% 36%, var(--ink-soft) 0%, var(--ink-hard) 78%);
+  transition: scale var(--parpadeo) cubic-bezier(.45,0,.55,1);
+}
+/* En oscuro las tintas van del reves: sin esto el borde salia mas claro
+   que el centro y la pupila parecia hundida. */
+html.oscuro .eye .pupil{
+  background:
+    radial-gradient(circle at 32% 28%, #fff 0 11%, transparent 12.5%),
+    radial-gradient(circle at 40% 36%, var(--ink-hard) 0%, var(--ink-soft) 78%);
+}
+/* Un ojo que no parpadea nunca esta muerto. Lo dispara welcome.js a
+   intervalos irregulares: a ritmo fijo se oye el metronomo. El de la
+   entrada es el mismo parpadeo, solo que no se vuelve a abrir. */
+.eye.pestanea .pupil,
+body.entrando .pupil{ scale: 1 .06; }
+
+.eye .name{
+  margin:0; font-weight:400; color: var(--ink-soft);
+  font-size: clamp(17px, 1.55vw, 24px); letter-spacing:.005em;
+}
+
+/* Salida: el ojo parpadea y la portada se funde. Sin zoom: el tunel, al
+   otro lado, llega destapandose (la transicion de la casa: js/welcome.js
+   la deja apuntada), asi que se lee como un solo corte suave. El fundido espera al
+   parpadeo para que se vea cerrarse el ojo. */
+body.entrando .landing{
+  opacity:0;
+  transition: opacity var(--fundido) ease var(--parpadeo);
+}
+
+/* ============================================================
+   WORK — indice
+   Lista, no rejilla: los titulos son largos y una rejilla los
+   parte. La imagen aparece al pasar por encima.
+   ============================================================ */
+.wrap{ padding: 0 var(--pad) calc(var(--pad) * 3); }
+
+.index{ list-style:none; margin:0; padding:0; }
+.index li{ border-top:1px solid var(--linea); }
+.index li:last-child{ border-bottom:1px solid var(--linea); }
+.index a{
+  display:grid; align-items:baseline; gap: var(--gap);
+  grid-template-columns: 1fr 14ch 6ch;
+  padding: clamp(11px,1.1vw,17px) 0;
+  color: var(--ink-soft);
+}
+.index a:hover{ color: var(--ink-hard); }
+.index .t{ font-size: clamp(16px,1.5vw,22px); }
+.index .t small{ display:block; font-size: var(--fs-meta); color: var(--ink-faint); margin-top:.25em; }
+.index .c,.index .g{ font-size: var(--fs-meta); color: var(--ink-faint); }
+.index .g{ text-align:right; }
+
+/* miniatura flotante al hover, sigue al raton */
+.peek{ top:0; left:0;
+  position:fixed; z-index:5; width: 240px; pointer-events:none;
+  opacity:0; transition: opacity .18s ease;
+}
+.peek img, .peek video, .peek .sin{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background: var(--hueco); }
+.peek.on{ opacity:1; }
+
+/* ============================================================
+   PROYECTO
+   Dos columnas: media scrollea, texto se queda quieto.
+   ============================================================ */
+/* About y proyecto ocupan al menos la pantalla entera, para que lo que va
+   al pie (firma, idiomas, anterior/siguiente) quede al pie de verdad y no
+   flotando con un hueco debajo. */
+body:has(> main.about, > main.project){ display:flex; flex-direction:column; min-height:100dvh; }
+main.about, main.project{ flex:1 0 auto; }
+
+.project{
+  display:grid; gap: var(--gap);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  padding: 0 var(--pad) var(--edge-y);
+  align-items:start;
+}
+/* En el DOM van .side (texto + creditos) y luego .media, que es el orden
+   de movil. En escritorio se invierten con grid-column, sin tocar el HTML. */
+/* El texto se queda quieto mientras la media baja. Lleva dentro todo lo
+   que se usa sin tener que llegar al final: creditos, anterior/siguiente e
+   idiomas. Mide al menos lo que queda de pantalla bajo la barra de arriba,
+   y la navegacion va a su pie (margin-top:auto): al pie de la pantalla. */
+.side{
+  grid-column:2; grid-row:1; position:sticky; top: var(--side-top, var(--pad)); min-width:0;
+  display:flex; flex-direction:column;
+  min-height: calc(100dvh - var(--nav-alto) - var(--edge-y));
+}
+.media{ grid-column:1; grid-row:1; display:grid; gap: clamp(6px,.7vw,12px); min-width:0; }
+.media figure{ margin:0; }
+.media img, .media video{ width:100%; height:auto; display:block; background: var(--hueco); }
+/* Sin width/height (la vista previa no lee las medidas) una foto por cargar
+   mide cero, y la columna pegaba un salto con cada una. Mientras no llega,
+   hueco 16:9; en cuanto llega, su proporcion de verdad. */
+.media img:not([width]){ aspect-ratio: auto 16 / 9; }
+
+/* El video del enlace: su fotograma con un play, y el reproductor al darle
+   (js/media.js). Mismo formato que el resto del carrusel. */
+.embed .yt, .embed iframe{ display:block; position:relative; width:100%; aspect-ratio:16/9; border:0; }
+.embed .yt img{ width:100%; height:100%; object-fit:cover; }
+/* La pieza interactiva: el mismo marco, con la portada del proyecto de
+   fondo si la hay, y el iframe en su lugar al darle al play. */
+.pieza{ display:block; position:relative; width:100%; aspect-ratio:16/9; border:0;
+  background:#1a1a1a center/cover no-repeat; }
+/* ya cargando, del color del fondo: la pieza aparece sin un cuadro negro */
+iframe.pieza{ background: var(--bg); }
+.embed .play, .pieza .play{
+  position:absolute; left:50%; top:50%; translate:-50% -50%;
+  width:clamp(52px, 5vw, 72px); aspect-ratio:1; border-radius:50%;
+  background: rgba(250,250,250,.86);
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), background .25s ease;
+}
+.embed .play::after, .pieza .play::after{                    /* el triangulo, algo a la derecha: centro optico */
+  content:''; position:absolute; left:54%; top:50%; translate:-50% -50%;
+  border-style:solid; border-width:.55em 0 .55em .95em;
+  border-color: transparent transparent transparent var(--ink-hard);
+  font-size:clamp(14px, 1.3vw, 19px);
+}
+.embed .yt:hover .play, .embed .yt:focus-visible .play,
+.pieza:hover .play, .pieza:focus-visible .play{ transform:scale(1.08); background:#fff; }
+
+.info{ min-width:0; }
+
+.title{
+  margin:0 0 .5em;
+  font-weight:400; font-size: var(--fs-title); line-height:1.02;
+  color: var(--ink-soft); letter-spacing:-.012em;
+}
+.title .at{ color: var(--ink-faint); margin:0 .12em; }   /* la @ separada, como en la ref */
+
+/* fila de metadatos: fecha | cliente | tags, justificada al ancho */
+.meta{
+  display:grid; grid-template-columns: 1fr 1fr 1fr; align-items:baseline;
+  font-size: var(--fs-meta); color: var(--ink-soft);
+  padding-bottom: clamp(16px,1.8vw,30px);
+}
+.meta .d{ font-style:italic; }
+.meta .c{ text-align:center; }
+.meta .g{ text-align:right; letter-spacing:.06em; }
+.meta .g a{ color:inherit; }
+
+.body p{ margin:0 0 1em; text-align:justify; hyphens:auto; }
+.body p:last-child{ margin-bottom:0; }
+
+.watch{
+  display:inline-block; margin-top: 1.4em;
+  font-size: var(--fs-meta); color: var(--ink-soft);
+  border-bottom:1px solid var(--ink-faint); padding-bottom:.15em;
+}
+.watch:hover{ color: var(--ink-hard); border-color: var(--ink-hard); }
+
+.credits{
+  margin-top: max(var(--aire), clamp(40px,6vw,110px));
+  font-size: var(--fs-meta); min-width:0;
+}
+.credits h2{
+  margin:0 0 .45em; font-weight:400; color: var(--ink-soft);
+  font-size: clamp(15px,1.25vw,19px);
+}
+.credits dl{ margin:0; }
+.credits .row{ display:block; }
+.credits dt{ display:inline; font-weight:700; color: var(--ink-hard); }
+.credits dd{ display:inline; margin:0; color: var(--ink-soft); }
+.credits dd a{ color:inherit; }
+.credits dd a:hover{ color: var(--ink-hard); }
+
+/* Dos lineas al pie del bloque: anterior a la izquierda y siguiente a la
+   derecha; debajo, volver bajo el anterior y los idiomas bajo el siguiente.
+   Los titulos son largos, asi que cada uno se corta con puntos suspensivos
+   y el entero sale al pasar por encima. */
+.navega{
+  margin-top:auto; padding-top: var(--aire);
+  display:grid; gap:.9em; font-size: var(--fs-meta);
+  /* una columna que no crece con el texto: si no, un titulo largo sin
+     cortar ensanchaba el pie y la pagina se arrastraba de lado en el movil */
+  grid-template-columns: minmax(0, 1fr);
+}
+.pager, .navega .abajo{ display:flex; justify-content:space-between; align-items:baseline; gap:2ch; }
+.pager a{ display:flex; gap:.5ch; min-width:0; max-width:48%; color: var(--ink-soft); white-space:nowrap; }
+.pager .tt{ overflow:hidden; text-overflow:ellipsis; }
+.pager .sgte{ margin-left:auto; }
+.pager a:hover, .navega .volver:hover{ color: var(--ink-hard); }
+.navega .volver{ color: var(--ink-soft); }
+.navega .langs{ position:static; margin-left:auto; margin-right:-.3rem; }
+
+/* ============================================================
+   LAB
+   Un parque: todo a la vista. En la lista, la portada al lado de
+   cada pieza. En la pagina, la pieza arriba a pantalla entera y
+   texto, creditos y fotos debajo, en una columna.
+   ============================================================ */
+.index--lab a{ grid-template-columns: clamp(96px, 14vw, 220px) 1fr 14ch 6ch; align-items:center; }
+.index--lab .mini{ display:block; aspect-ratio:16/9; overflow:hidden; background: var(--hueco); }
+.index--lab .mini img{ width:100%; height:100%; object-fit:cover; }
+
+.project--lab{ display:flex; flex-direction:column; align-items:stretch; gap: var(--aire); }
+.project--lab .side{ display:contents; }
+.project--lab .info, .project--lab .credits{ max-width:62ch; }
+.project--lab .credits{ order:2; margin-top:0; }
+.project--lab .media{ order:3; grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); }
+.project--lab .media:not(:has(*)){ display:none; }
+.project--lab .navega{ order:4; margin-top:0; padding-top:0; }
+/* lo que queda de pantalla bajo la barra de arriba */
+.escenario .pieza{ aspect-ratio:auto; height: calc(100dvh - var(--nav-alto) - var(--edge-y)); }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about{ max-width: 62ch; padding: 0 var(--pad) var(--pad); }
+.about h1{
+  margin:0 0 .6em; font-weight:400; color: var(--ink-soft);
+  font-size: clamp(26px,3.2vw,44px); line-height:1.05;
+}
+.about p{ margin:0 0 1.1em; text-align:justify; hyphens:auto; }
+.about .contact{ margin:2.4em 0 .6em; font-size: var(--fs-meta); }
+/* el correo sale como un boton con cara de enlace, y al clicarlo se cambia
+   por el enlace de verdad (js/correo.js) */
+.about .correo{
+  font:inherit; color:inherit; background:none; border:0; padding:0 0 .1em; cursor:pointer;
+  border-bottom:1px solid var(--ink-faint);
+}
+.about .correo:hover{ color: var(--ink-hard); border-color: var(--ink-hard); }
+.about .redes{ display:flex; flex-wrap:wrap; gap:.4em 1.4em; margin:0; font-size: var(--fs-meta); text-align:left; }
+.about .redes a{ border-bottom:1px solid var(--ink-faint); }
+.about .redes a:hover{ border-color: var(--ink-hard); }
+
+/* ============================================================
+   PIE — la firma
+   ============================================================ */
+.sig{
+  position:fixed; left:var(--pad); bottom:var(--pad); z-index:3;
+  margin:0; font-size: var(--fs-meta); color: var(--ink-faint);
+}
+.sig a{ color: var(--ink-soft); }
+.sig a:hover{ color: var(--ink-hard); }
+
+/* Pie de las paginas que scrollean: los dos elementos dejan de estar
+   anclados y pasan a ser una fila al final del documento. */
+/* Idioma, letra y tema centrados, y la firma debajo. */
+.foot{
+  display:flex; flex-direction:column; align-items:center; gap:.6rem;
+  padding: var(--pad) var(--pad) var(--edge-y);
+}
+.foot .sig, .foot .langs{ position:static; padding:0; }
+.foot .sig{ text-align:center; }
+
+/* ============================================================
+   WORK
+   Las dos vistas comparten barra: nav a la izquierda, controles a
+   la derecha. Lo unico que cambia debajo es como se pinta la lista.
+   ============================================================ */
+/* Un solo renglon: la navegacion a la izquierda y los controles pegados a
+   la derecha, tambien en el telefono. Antes, por debajo de 820px, los
+   controles se bajaban a una segunda fila a todo lo ancho y con
+   space-between, asi que la cabecera ocupaba el doble de alto y los tres
+   grupos quedaban desperdigados. */
+.topbar{
+  /* al centro y no a la linea de la letra: los iconos y el idioma no tienen
+     linea de letra, y en el movil cada uno quedaba a una altura */
+  display:flex; align-items:center; gap:1rem;
+  font-size: var(--fs-nav); line-height: var(--fila);
+  padding: calc(var(--pad-top) + var(--safe-top)) var(--pad) 0;
+  /* Por encima de la escena del tunel, que ocupa la pantalla entera */
+  position:relative; z-index:4;
+}
+.topbar .nav{ padding:0; flex:0 0 auto; font-size:inherit; }
+.controles{ display:flex; align-items:center; gap:.9rem; margin-left:auto; flex:0 0 auto; }
+.controles .langs{ position:static; padding:0; margin-right:-.2rem; }
+
+/* Tunel / lista se escribe igual que home / work / about, pero a la
+   derecha: mismo tamano, mismos grises, la barra de separacion y el activo
+   en negrita. Antes era mas pequeno y de otro gris, y la cabecera parecia
+   hecha de dos piezas. Los desplegables de la lista, al mismo tamano. */
+.vistas{ display:flex; align-items:center; }
+.vistas button, .menu .cabeza, .opciones button{
+  font:inherit; line-height:inherit;
+  background:none; border:0; padding:0; cursor:pointer;
+  color: var(--ink-soft); transition: color .2s ease;
+}
+.vistas button:hover, .menu .cabeza:hover, .opciones button:hover{ color: var(--ink-hard); }
+/* Un boton con las dos palabras en la misma casilla: se ve la de la
+   vista actual y la otra guarda el ancho, asi no baila al cambiar */
+.vistas button{ display:inline-grid; color: var(--ink-hard); font-weight:700; }
+.vistas button span{ grid-area:1/1; text-align:right; }
+/* el icono, del tamano de los de idioma, letra y tema */
+.vistas .ico{ width:1rem; height:1rem; }
+.vistas .ico[data-vista="tunel"]{ --i:url(../assets/iconos/icon_tunnel.png); }
+.vistas .ico[data-vista="lista"]{ --i:url(../assets/iconos/icon_list.png); }
+body[data-vista="tunel"] .vistas [data-vista="lista"],
+body[data-vista="lista"] .vistas [data-vista="tunel"]{ visibility:hidden; }
+.vistas button:focus-visible, .menu button:focus-visible{
+  outline:1px solid var(--ink-hard); outline-offset:3px;
+}
+
+/* ---------- desplegables ---------- */
+.menu{ position:relative; }
+.menu .cabeza{ display:flex; align-items:baseline; gap:.45ch; white-space:nowrap; }
+.menu .et{ color: var(--ink-faint); }
+.menu .val{ color: var(--ink-hard); }
+.menu .cabeza::after{
+  content:''; width:0; height:0; margin-left:.2ch;
+  border:3px solid transparent; border-top-color: currentColor;
+  translate:0 1px; transition: rotate .2s ease;
+}
+.menu .cabeza[aria-expanded="true"]::after{ rotate:180deg; }
+
+.opciones{
+  position:absolute; top:100%; right:0; z-index:20;
+  display:flex; flex-direction:column; align-items:stretch;
+  margin-top:.5em; padding:.35rem;
+  /* Blanco, no el gris del papel: flota sobre el contenido y tiene que
+     despegarse de el. Es el unico sitio de la web con sombra. */
+  background: var(--caja); border:1px solid var(--caja-borde);
+  box-shadow: 0 6px 20px rgba(0,0,0,.055);
+  min-width: max-content;
+}
+/* display:flex gana al [hidden] del navegador, hay que decirlo aparte */
+.opciones[hidden]{ display:none; }
+.opciones button{ text-align:right; padding:.3rem .5rem; font-size:.9em; }
+/* la activa sale marcada, no escondida: la lista de opciones es completa */
+.opciones button[aria-pressed="true"]{ color: var(--ink-hard); font-weight:700; }
+
+/* ---------- que se ve en cada vista ---------- */
+body[data-vista="tunel"] .index,
+body[data-vista="lista"] .escena,
+body[data-vista="lista"] .tiempo{ display:none; }
+/* Orden y filtro son cosa de la lista: el tunel es siempre la linea del
+   tiempo entera, en orden de fecha. */
+body[data-vista="tunel"] .menu{ display:none; }
+/* En work, idioma, letra y tema van arriba al centro, en las dos vistas. */
+.controles .langs{ position:absolute; left:50%; right:auto; bottom:auto; translate:-50% 0; margin:0; }
+/* Sin scroll ni rebote: en el tunel el gesto es de la camara. */
+body[data-vista="tunel"]{ overflow:hidden; overscroll-behavior:none; }
+html:has(body[data-vista="tunel"]){ overscroll-behavior:none; }
+body[data-vista="tunel"] .wrap{ padding:0; }
+body[data-vista="lista"] .wrap{ padding-top: calc(var(--pad) * .9); }
+
+/* ============================================================
+   Vista tunel
+   Las cartas viven en un espacio con perspectiva. Lo que se mueve
+   es la camara (js/tunnel.js): aqui solo se declara el escenario.
+   La escena ocupa la pantalla entera, detras de la cabecera y de
+   la barra del tiempo: cualquier sitio sirve para arrastrar.
+   ============================================================ */
+.escena{
+  position:fixed; inset:0; z-index:1;
+  perspective: 900px;                 /* tunnel.js la lee de aqui */
+  perspective-origin: 50% 46%;
+  overflow:hidden;
+  touch-action:none; cursor:grab;
+  user-select:none; -webkit-user-select:none;
+}
+.escena.arrastrando{ cursor:grabbing; }
+
+.tunel{ position:absolute; inset:0; transform-style:preserve-3d; }
+
+/* Sin sombra ni borde: las fotos flotan sobre el fondo de puntos, y la
+   profundidad la dicen el tamano, el desenfoque y el color. */
+.carta{
+  position:absolute; left:50%; top:46%;   /* el top es OPTICO en tunnel.js */
+  /* tambien por alto: en una pantalla baja (movil en horizontal) una
+     carta a lo ancho no dejaba sitio para repartir las demas */
+  /* Todas ocupan lo mismo de pantalla, no lo mismo de ancho: con el ancho
+     fijo una panoramica (La Roda, 2.6:1) salia baja y parecia pequena al
+     lado de una casi cuadrada. --ancho es el de una 16:9; las demas lo
+     escalan por la raiz de su proporcion (--r, la pone tunnel.js). Sin
+     sqrt() en el navegador, todas a --ancho como antes. */
+  --ancho: min(clamp(240px, 36vw, 500px), 70dvh);
+  width: var(--ancho);
+  width: min(calc(var(--ancho) * sqrt(var(--r, 1.7778) / 1.7778)), 88vw);
+  aspect-ratio:16/9;                       /* hasta saber la de su portada (util.js) */
+  will-change:transform,opacity,filter;
+  -webkit-user-drag:none;
+}
+.carta img, .carta canvas, .carta .sin{
+  display:block; width:100%; height:100%;
+  object-fit:cover; background: var(--hueco) center/cover;
+  -webkit-user-drag:none; user-select:none; pointer-events:none;
+  transition: transform .28s cubic-bezier(.2,.7,.2,1);
+}
+.carta:focus-visible{ outline:2px solid var(--ink-hard); outline-offset:4px; }
+@media (hover:hover) and (pointer:fine){
+  .carta:hover img, .carta:hover canvas{ transform:scale(1.025); }
+}
+
+/* ============================================================
+   Linea del tiempo
+   Una raya de lado a lado de la pantalla, y encima los proyectos,
+   cada uno en su fecha: dos del mismo mes salen pegados y un ano
+   sin nada deja hueco. El pomo es la misma bola que la pupila del
+   ojo: avanza con el tunel y se arrastra.
+   ============================================================ */
+.tiempo{
+  position:fixed; left:0; right:0; bottom: var(--edge-y); z-index:3;
+  padding: 0 var(--pad);
+}
+/* La zona util es la barra entera: gana el proyecto mas cercano a donde
+   sueltas. Se agranda el area, no el dibujo: el dedo tiene 48px. */
+.barra{ position:relative; height:3rem; cursor:pointer; touch-action:none; }
+.linea, .relleno{
+  position:absolute; top:50%; height:1px; pointer-events:none;
+  left: calc(-1 * var(--pad));
+}
+.linea{ right: calc(-1 * var(--pad)); background: var(--ink-faint); }
+/* lo recorrido va un gris mas oscuro; el ancho lo pone tunnel.js */
+.relleno{ width:0; background: var(--ink-soft); }
+.marcas{ position:absolute; inset:0; }
+.marca{
+  position:absolute; top:50%; translate:-50% -50%;
+  width:30px; height:44px; padding:0; border:0; background:none; cursor:pointer;
+}
+.marca::after{
+  content:''; position:absolute; inset:50% auto auto 50%; translate:-50% -50%;
+  width:10px; height:10px; border-radius:50%;
+  background: var(--bola);
+  transition: transform .22s ease;
+}
+.marca:hover::after{ transform:scale(1.3); }
+.marca:focus-visible{ outline:1px solid var(--ink-hard); }
+.pomo{
+  position:absolute; top:50%; left:0; translate:-50% -50%;
+  width:20px; height:20px; border-radius:50%; pointer-events:none;
+  background: var(--bola-activa);
+  transition: transform .2s ease;
+}
+.barra:hover .pomo, .barra.raspando .pomo{ transform:scale(1.15); }
+
+/* El rotulo dice que proyecto tienes delante y cuelga sobre el pomo (el
+   `left` lo pone tunnel.js, recortado contra los extremos). Es un enlace:
+   tambien se entra por ahi. */
+.rotulo{
+  position:absolute; bottom:100%; left:0; translate:-50% 0;
+  width:max-content; max-width:calc(100vw - 2 * var(--pad)); padding-bottom:.1em;
+  overflow:hidden; text-overflow:ellipsis;
+  font-size: var(--fs-meta); color: var(--ink); white-space:nowrap;
+  margin-left: var(--pad);
+}
+.rotulo:hover b{ color: var(--ink-hard); }
+.rotulo b{ font-weight:400; color: var(--ink-hard); }
+.rotulo i{ font-style:normal; margin-left:1ch; }
+
+/* ============================================================
+   RESPONSIVE
+   Un unico corte. Estaba partido en dos bloques con tres
+   secciones enteras en medio, y las reglas de movil acababan
+   en dos sitios distintos del fichero.
+   ============================================================ */
+@media (max-width: 820px){
+  /* Una sola columna y scroll vertical, sin carrusel: texto y creditos
+     (lo que en el ordenador va a la derecha), luego las fotos y videos uno
+     debajo de otro, y la navegacion justo despues de lo ultimo. El carrusel
+     escondia casi todo el material detras de la primera foto. */
+  .project{ display:flex; flex-direction:column; align-items:stretch; gap: clamp(26px,6vw,44px); }
+  .side{ display:contents; }
+  .info   { order:1; }
+  .credits{ order:2; margin-top:0; }
+  .media  { order:3; gap:8px; }
+  .navega { order:4; margin-top:0; padding-top:0; }
+  .navega .langs{ padding:0; }
+  .nav .aqui{ max-width:38vw; }
+
+  .index a{ grid-template-columns: 1fr auto; gap: 1.5ch; }
+  .index--lab a{ grid-template-columns: 30vw 1fr auto; }
+  .index .c{ display:none; }
+  .peek{ display:none; }
+  .langs, .sig{ position:static; }
+  .langs{ justify-content:flex-end; padding: 0 var(--pad) calc(var(--pad) + env(safe-area-inset-bottom, 0px)); }
+  .foot .langs{ padding:0; }
+  .meta{ grid-template-columns: 1fr; gap:.15em; }
+  .meta .c, .meta .g{ text-align:left; }
+
+  /* En un telefono los cuatro grupos —nav, vista, orden y filtro— no caben
+     a su tamano natural en un solo renglon (hacen falta unos 425px y hay
+     375). Se aprieta todo un punto y se cae la etiqueta "sort": el valor y
+     la flecha ya dicen que es un desplegable, y al abrirlo la palabra esta
+     dentro. Preferimos eso a partir la cabecera en dos pisos. */
+  /* La barra va con los margenes de --pad y --pad-top, como la de about y
+     la de los proyectos: con unos propios el menu saltaba de sitio al
+     cambiar de pagina */
+  :root{ --pad-top:14px; }
+  .topbar{ gap:.5rem; }
+  .controles{ gap:.7rem; }
+  /* Por si en un telefono muy estrecho no cabe, lo ultimo baja a otro
+     renglon, pegado a la derecha, en vez de salirse */
+  .controles{ flex:0 1 auto; min-width:0; flex-wrap:wrap; justify-content:flex-end; row-gap:.3rem; }
+  .topbar{ font-size: calc(var(--fs-nav) * .92); }
+  /* La palabra "sort" se va de la vista, pero no del arbol de accesibilidad:
+     con display:none el boton se anunciaria solo como "date" y no habria
+     forma de saber que es el control de orden. Se esconde como el h1. */
+  .menu[data-menu="sort"] .et{
+    position:absolute; width:1px; height:1px;
+    overflow:hidden; clip-path:inset(50%); white-space:nowrap;
+  }
+  .nav--inline{ gap:.35ch; }
+  .nav{ font-size:.92em; }
+
+  /* 19px de alto era la mitad del objetivo tactil. El margen negativo se come
+     el relleno extra, asi que la barra se ve exactamente igual. */
+  .vistas button, .menu .cabeza, .opciones button{
+    padding:1rem 0; margin:-1rem 0;    /* lo mismo arriba y abajo: no cambia el alto */
+  }
+  .carta{ --ancho: min(340px, 76vw, 64dvh); }
+}
+
+/* Pantallas bajas (movil en horizontal): la barra del tiempo se arrima al
+   borde y encoge, que cada pixel de alto es escenario. */
+@media (max-height: 520px){
+  .tiempo{ bottom: calc(6px + env(safe-area-inset-bottom, 0px)); }
+  .barra{ height:2.4rem; }
+}
+
+/* Work en el movil: en el tunel, idioma, letra y tema van en la barra,
+   a la izquierda de tunel/lista. En la lista la barra ya lleva orden y
+   filtro: los tres bajan al pie, al final del scroll o al pie de la
+   pantalla si la lista es corta */
+.pie-lista{ display:none; }
+/* en la portada, abajo al centro */
+.landing .langs{ right:auto; left:50%; translate:-50% 0; }
+@media (max-width: 820px){
+  body[data-vista="tunel"] .controles .langs{ position:static; translate:none; order:-1; }
+  body[data-vista="lista"] .controles .langs{ display:none; }
+  body[data-vista="lista"]{ display:flex; flex-direction:column; min-height:100dvh; }
+  body[data-vista="lista"] .wrap{ flex:1; display:flex; flex-direction:column; padding-bottom:0; }
+  body[data-vista="lista"] .pie-lista{ display:block; margin-top:auto; padding-top: calc(var(--pad) * 2); }
+  .pie-lista .langs, .landing .langs{ justify-content:center; translate:none; }
+}
+
+/* Telefonos pequenos (iPhone SE y compania): un punto mas de apriete para
+   que el renglon de arriba siga siendo uno solo. */
+@media (max-width: 360px){
+  :root{ --pad:12px; --pad-top:12px; }
+  .topbar{ gap:.4rem; }
+  .controles{ gap:.45rem; }
+  .topbar{ font-size: calc(var(--fs-nav) * .86); }
+  .nav{ font-size:.86em; }
+}
+
+/* Entre paginas, la transicion de la casa (css/transicion.css). Al
+   cambiar tunel / lista, un fundido dentro de la misma pagina: lo hace el
+   navegador (View Transitions; js/work.js pone .vista-cambia mientras dura);
+   el que no lo sabe cambia de golpe. Quien pide menos movimiento no lo ve. */
+.vista-cambia::view-transition-old(root){ animation: .35s ease both vt-fuera; }
+.vista-cambia::view-transition-new(root){ animation: .35s ease both vt-dentro; }
+@keyframes vt-fuera{ to{ opacity:0; } }
+@keyframes vt-dentro{ from{ opacity:0; } }

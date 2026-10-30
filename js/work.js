@@ -1,0 +1,129 @@
+/* ============================================================
+   Controles de work: vista, orden y filtro.
+   ------------------------------------------------------------
+   La lista es el <ul class="index"> del HTML: aqui se reordena y
+   se ocultan elementos. El orden y el filtro son solo de la lista;
+   el tunel lee el mismo <ul> pero siempre entero y por fecha, y
+   del evento 'lista:cambia' solo usa el cambio de vista.
+   ============================================================ */
+import { portada } from './util.js';
+
+const lista = document.getElementById('index');
+
+if (lista) {
+  const items = [...lista.children];
+
+  const avisar = () => dispatchEvent(new CustomEvent('lista:cambia'));
+
+  /* ---- menus desplegables --------------------------------- */
+  const menus = [...document.querySelectorAll('.menu')];
+  const cerrarTodos = menos => menus.forEach(m => {
+    if (m === menos) return;
+    m.querySelector('.opciones').hidden = true;
+    m.querySelector('.cabeza').setAttribute('aria-expanded', 'false');
+  });
+
+  /** Engancha un menu desplegable y avisa con el valor elegido. */
+  function montar(m, alElegir) {
+    const cabeza = m.querySelector('.cabeza');
+    const caja   = m.querySelector('.opciones');
+    const val    = m.querySelector('.val');
+    const opts   = [...caja.querySelectorAll('button')];
+
+    const poner = b => {
+      opts.forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+      val.textContent = b.textContent.trim();
+      caja.hidden = true;
+      cabeza.setAttribute('aria-expanded', 'false');
+      alElegir(b.dataset.v);
+    };
+
+    cabeza.addEventListener('click', () => {
+      const abierto = !caja.hidden;
+      cerrarTodos(m);
+      caja.hidden = abierto;
+      cabeza.setAttribute('aria-expanded', String(!abierto));
+      if (!abierto) opts.find(o => o.getAttribute('aria-pressed') === 'true')?.focus();
+    });
+    opts.forEach(b => b.addEventListener('click', () => poner(b)));
+    m.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      caja.hidden = true; cabeza.setAttribute('aria-expanded', 'false'); cabeza.focus();
+    });
+
+    // valor de arranque: el que viene marcado del generador
+    val.textContent = opts.find(o => o.getAttribute('aria-pressed') === 'true').textContent.trim();
+  }
+
+  addEventListener('pointerdown', e => { if (!e.target.closest('.menu')) cerrarTodos(null); });
+
+  /* ---- orden ---------------------------------------------- */
+  // fecha: de mas reciente a mas antiguo. cliente y titulo: alfabetico.
+  const cmp = {
+    date:   (a, b) => b.dataset.date.localeCompare(a.dataset.date),
+    client: (a, b) => a.dataset.client.localeCompare(b.dataset.client, 'es'),
+    title:  (a, b) => a.dataset.title.localeCompare(b.dataset.title, 'es'),
+  };
+  const mSort = document.querySelector('[data-menu="sort"]');
+  if (mSort) montar(mSort, v => {
+    [...items].sort(cmp[v]).forEach(li => lista.append(li));
+    avisar();
+  });
+
+  /* ---- filtro --------------------------------------------- */
+  const mTag = document.querySelector('[data-menu="tag"]');
+  if (mTag) montar(mTag, v => {
+    items.forEach(li => { li.hidden = !!v && !li.dataset.tags.split(' ').includes(v); });
+    avisar();
+  });
+
+  /* ---- conmutar vista ------------------------------------- */
+  const aplicar = v => {
+    document.body.dataset.vista = v;
+    try { localStorage.setItem('vista', v); } catch {}
+    avisar();
+  };
+  // con fundido si el navegador sabe (View Transitions); si no, de golpe
+  document.querySelector('.vistas .vista')?.addEventListener('click', () => {
+    const otra = document.body.dataset.vista === 'tunel' ? 'lista' : 'tunel';
+    if (document.startViewTransition) {
+      // .vista-cambia: el fundido de esta (css/style.css), no el de ir a otra pagina
+      const html = document.documentElement;
+      html.classList.add('vista-cambia');
+      const vt = document.startViewTransition(() => aplicar(otra));
+      vt.ready.catch(() => {});   // pestana oculta: se salta el fundido
+      vt.finished.finally(() => html.classList.remove('vista-cambia'));
+    } else aplicar(otra);
+  });
+  // lab no tiene tunel: se queda en la lista que trae el HTML, y sin tocar
+  // la vista guardada, que es la de work
+  if (document.querySelector('.vistas')) {
+    let guardada = 'tunel';
+    try { guardada = localStorage.getItem('vista') || 'tunel'; } catch {}
+    aplicar(guardada);
+  }
+
+  /* ---- miniatura al pasar por la lista -------------------- */
+  // En pantalla tactil no hay hover, asi que la miniatura no se monta.
+  // Puede ser una foto, un webp animado o un video: la pinta portada().
+  const peek = matchMedia('(hover: none)').matches ? null : document.getElementById('peek');
+  if (peek) {
+    let actual = null;
+
+    lista.addEventListener('pointerover', e => {
+      const a = e.target.closest('a[data-peek], a[data-peek-video]');
+      if (!a) return;
+      if (a !== actual) { actual = a; peek.replaceChildren(portada(a)); }
+      peek.classList.add('on');
+    });
+    lista.addEventListener('pointerout', e => {
+      if (!e.relatedTarget || !lista.contains(e.relatedTarget)) peek.classList.remove('on');
+    });
+    addEventListener('pointermove', e => {
+      if (!peek.classList.contains('on')) return;
+      const x = Math.min(e.clientX + 24, innerWidth  - peek.offsetWidth  - 12);
+      const y = Math.min(e.clientY + 24, innerHeight - peek.offsetHeight - 12);
+      peek.style.transform = `translate(${x}px, ${y}px)`;
+    }, { passive: true });
+  }
+}

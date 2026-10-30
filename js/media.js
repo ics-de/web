@@ -1,0 +1,128 @@
+/* ============================================================
+   Los videos del proyecto, solo cuando se ven
+   ------------------------------------------------------------
+   Antes cada <video> llevaba `autoplay`, y `autoplay` gana a
+   `preload`: los cuatro videos de una pagina se bajaban enteros
+   antes de que nadie hiciera scroll. La de AMORE pesaba 9 MB, de
+   los cuales 6 eran un clip que esta al final del carrete.
+
+   Ahora salen del generador con preload="none" y sin autoplay: lo
+   que se ve de entrada es el poster, que es un fotograma suyo y
+   pesa 40 KB. Cuando uno entra en pantalla se le pide el video y
+   se reproduce; cuando sale, se para. Igual de vivo, y solo se
+   baja lo que de verdad se mira.
+
+   Sin JavaScript queda el poster, que es la misma imagen: la
+   pagina se lee entera, que es lo que importa.
+   ============================================================ */
+import { seco } from './util.js';
+
+// el ultimo proyecto visto: al volver a work, el tunel arranca en el (tunnel.js)
+try { sessionStorage.setItem('proyecto', location.pathname + location.search); } catch {}
+
+const videos = [...document.querySelectorAll('.media video')];
+
+if (videos.length) {
+  /* Con movimiento reducido no arranca nada solo. Pero el video sigue
+     siendo parte del trabajo, asi que se le ponen los controles: se ve
+     cuando se quiera ver, no cuando lo decida la pagina. */
+  if (seco) {
+    for (const v of videos) v.controls = true;
+  } else if (!('IntersectionObserver' in window)) {
+    // Sin observador (navegador muy viejo): como antes, todos a la vez.
+    for (const v of videos) { v.preload = 'auto'; v.play().catch(() => {}); }
+  } else {
+    /* Los que ahora mismo tocaria estar viendo. Hace falta la lista aparte
+       porque un play() puede no cuajar —ver mas abajo— y entonces hay que
+       saber a cuales volver. */
+    const enPantalla = new Set();
+
+    /* play() devuelve una promesa, y el navegador la rechaza cuando decide
+       que no toca. El caso que importa: en una pestana de fondo Chrome para
+       el video sin sonido para ahorrar bateria ("video-only background media
+       was paused to save power"). No es un error nuestro, pero si no se
+       reintenta al volver, quien abre la pagina en otra pestana y viene
+       despues se encuentra los videos congelados en el poster. */
+    const arrancar = v => {
+      if (document.hidden) return;
+      if (v.preload !== 'auto') v.preload = 'auto';
+      v.play().catch(() => {});
+    };
+
+    /* El margen adelanta la carga media pantalla antes de que asome, que
+       es lo que hace que llegue reproduciendose y no en negro. */
+    const ojo = new IntersectionObserver(entradas => {
+      for (const e of entradas) {
+        const v = e.target;
+        if (e.isIntersecting) { enPantalla.add(v); arrancar(v); }
+        else { enPantalla.delete(v); if (!v.paused) v.pause(); }
+      }
+    }, { rootMargin: '50% 0px' });
+
+    for (const v of videos) ojo.observe(v);
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) for (const v of enPantalla) arrancar(v);
+    });
+  }
+}
+
+/* ============================================================
+   El video de YouTube y las piezas interactivas
+   ------------------------------------------------------------
+   Llegan del generador como un fotograma con un boton de play, que
+   es un enlace. Al darle se cambia por el iframe, y solo entonces:
+   el de YouTube son medio mega de guiones, y una build de Unity,
+   decenas de megas. youtube-nocookie no deja cookies hasta que se
+   reproduce. Con cmd/ctrl/shift el enlace abre aparte, como siempre.
+   ============================================================ */
+function alDarle(sel, iframe) {
+  for (const a of document.querySelectorAll(sel)) {
+    a.addEventListener('click', e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      const f = Object.assign(document.createElement('iframe'),
+        { title: a.getAttribute('aria-label') || '', allowFullscreen: true }, iframe(a));
+      a.replaceWith(f);
+      if (e.isTrusted) f.focus();   // la que arranca sola no se lleva el foco
+    });
+  }
+}
+// la pieza lleva permiso de pantalla completa y de mando
+alDarle('a.pieza[data-pieza]', a => ({ className: 'pieza', src: a.dataset.pieza,
+  allow: 'fullscreen; autoplay; gamepad' }));
+alDarle('.media a.yt[data-yt]', a => ({
+  src: `https://www.youtube-nocookie.com/embed/${a.dataset.yt}?autoplay=1&rel=0&playsinline=1`,
+  allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen' }));
+
+/* La pieza de lab, la de arriba a pantalla entera, arranca sola en un
+   ordenador con raton. En el movil espera al play: son decenas de megas
+   de datos, y Unity en un telefono a menudo ni arranca. */
+if (matchMedia('(pointer: fine)').matches)
+  document.querySelector('.escenario a.pieza[data-pieza]')?.click();
+
+/* ============================================================
+   El bloque del texto, siempre alcanzable
+   ------------------------------------------------------------
+   El texto se queda quieto mientras bajan las fotos (sticky), y
+   lleva dentro anterior/siguiente y los ajustes. Si es mas alto
+   que la pantalla —creditos largos, pantalla baja—, pegado arriba
+   su final no se veria hasta acabar la pagina. Asi que se pega
+   por abajo: el `top` pasa a ser negativo lo justo para que lo
+   ultimo quede a la vista. En movil no es caja (display:contents)
+   y no hay nada que hacer.
+   ============================================================ */
+const lado = document.querySelector('.project .side');
+if (lado) {
+  const ajustar = () => {
+    if (getComputedStyle(lado).display === 'contents') return;
+    // Pegado de forma que su pie quede donde esta ahora, a la distancia del
+    // borde de abajo que marca el relleno de .project: si es corto, no se
+    // mueve; si es mas alto que la pantalla, sube lo justo para que se vea.
+    const abajo = parseFloat(getComputedStyle(lado.parentElement).paddingBottom) || 0;
+    lado.style.setProperty('--side-top', `${Math.round(innerHeight - lado.offsetHeight - abajo)}px`);
+  };
+  ajustar();
+  addEventListener('resize', ajustar);
+  if ('ResizeObserver' in window) new ResizeObserver(ajustar).observe(lado);
+}

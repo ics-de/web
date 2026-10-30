@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/site.json",
+  "_": "Lo general de la web. «lists»: lo que sale en work y en lab, en este orden (cada nombre es una carpeta de projects/); un proyecto que no está en ninguna lista no sale en la web, pero se puede ver en la vista previa. Uno oculto, { \"project\": \"slug\", \"visible\": false }: tiene su página (para mandarla), pero no sale en la lista, ni en el túnel, ni en Google. «url»: el dominio, cuando lo haya (null hasta entonces). «social»: direcciones enteras; el texto del enlace sale solo (@usuario en Instagram, el nombre de la web en las demás). «menu»: las palabras de la web, por idioma.",
+  "title": "oriol colomer delgado",
+  "short": "oriol colomer",
+  "url": "https://oriolcolomerdelgado.com",
+  "lang": "en",
+  "langs": ["ca", "es", "en"],
+  "email": "oriolcolomerdelgado@gmail.com",
+  "social": [
+    "https://instagram.com/oriolonbass",
+    "https://github.com/ics-de",
+    "https://soundcloud.com/oriolcolomer",
+    "https://www.behance.net/oriolcolomerdelgado",
+    "https://www.linkedin.com/in/oriolcolomerdelgado/"
+  ],
+  "autoEnter": 8,
+  "tagline": {
+    "en": "Lighting design, concert visuals and music videos. Barcelona.",
+    "es": "Diseño de iluminación, visuales de directo y videoclips. Barcelona.",
+    "ca": "Disseny d'il·luminació, visuals de directe i videoclips. Barcelona."
+  },
+  "lists": {
+    "work": {
+      "name": "work",
+      "projects": [
+        "liquid-latex-rmx-llum",
+        "el-nino-bola-mori",
+        "la-roda-ouineta",
+        "listen-xicu-lighting",
+        "listen-xicu-promo",
+        "listen-xicu-visualizers",
+        "u-n-me-bby-xicu",
+        "lechatelier-sala-apolo-2025",
+        "radio-coral-cabiria",
+        "arxiu-archive",
+        "estat-dalarma-merce",
+        "amore-razzmatazz-2",
+        "gradients",
+        "2025-carles-castano"
+      ]
+    },
+    "lab": {
+      "name": "lab",
+      "projects": []
+    }
+  },
+  "menu": {
+    "credits": {"en": "Credits", "es": "Créditos", "ca": "Crèdits"},
+    "watch": {"en": "Watch", "es": "Ver", "ca": "Veure"},
+    "all": {"en": "all", "es": "todo", "ca": "tot"},
+    "sort": {"en": "sort", "es": "orden", "ca": "ordre"},
+    "byDate": {"en": "date", "es": "fecha", "ca": "data"},
+    "byClient": {"en": "client", "es": "cliente", "ca": "client"},
+    "byTitle": {"en": "title", "es": "título", "ca": "títol"},
+    "tunnel": {"en": "tunnel", "es": "túnel", "ca": "túnel"},
+    "list": {"en": "list", "es": "lista", "ca": "llista"},
+    "aria": {
+      "lang": {"en": "language", "es": "idioma", "ca": "idioma"},
+      "view": {"en": "view", "es": "vista", "ca": "vista"},
+      "projects": {"en": "projects", "es": "proyectos", "ca": "projectes"}
+    },
+    "mail": {"en": "email", "es": "email", "ca": "email"},
+    "tipo": {"en": "switch to wingdings", "es": "cambiar a wingdings", "ca": "canviar a wingdings"},
+    "tema": {"en": "dark mode", "es": "modo oscuro", "ca": "mode fosc"},
+    "back": {"en": "back", "es": "volver", "ca": "tornar"},
+    "notFound": {
+      "en": "this page doesn't exist.",
+      "es": "esta página no existe.",
+      "ca": "aquesta pàgina no existeix."
+    }
+  }
+}

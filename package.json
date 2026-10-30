@@ -1,0 +1,15 @@
+{
+  "name": "oriol-colomer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "media": "node build/media.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.5"
+  },
+  "engines": {
+    "node": "22"
+  }
+}
