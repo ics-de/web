@@ -46,7 +46,7 @@
     },
     "lab": {
       "name": "lab",
-      "projects": []
+      "projects": ["digital-gallery", "spacetime"]
     }
   },
   "menu": {
