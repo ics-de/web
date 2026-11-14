@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "gestures/take a look - TouchDesigner",
+  "date": "2025-05-18",
+  "client": "Personal",
+  "tags": ["vs"],
+  "subheader": {
+    "en": "TouchDesigner experiments",
+    "es": "TouchDesigner experiments",
+    "ca": "TouchDesigner experiments"
+  },
+  "text": {
+    "en": [
+      "in this case the user is invited to literally take a look, using their hands to create custom headwear by outlining the shapes their hands make.",
+      "\"gestures\" is a series of quick prototypes or experiments exploring the transformation of human gestures into digital interactions, generating a poetic dialog between input and output. they were all developed using Derivative TouchDesigner, mostly programmed in python and using the MediaPipe tools."
+    ],
+    "es": [
+      "en este caso se invita al usuario a literalmente echar un vistazo, usando sus manos para crear sombreros personalizados delineando las formas que hacen sus manos.",
+      "\"gestures\" es una serie de prototipos rápidos o experimentos que exploran la transformación de los gestos humanos en interacciones digitales, generando un diálogo poético entre entrada y salida. todos fueron desarrollados usando Derivative TouchDesigner, programados principalmente en python y utilizando las herramientas de MediaPipe."
+    ],
+    "ca": [
+      "en aquest cas es convida l'usuari a literalment fer una ullada, utilitzant les seves mans per crear barrets personalitzats delineant les formes que fan les seves mans.",
+      "\"gestures\" és una sèrie de prototips ràpids o experiments que exploren la transformació dels gestos humans en interaccions digitals, generant un diàleg poètic entre entrada i sortida. tots van ser desenvolupats utilitzant Derivative TouchDesigner, programats principalment en python i utilitzant les eines de MediaPipe."
+    ]
+  },
+  "credits": [
+    {"role": "code", "name": "oriol colomer"}
+  ],
+  "url": "https://www.youtube.com/shorts/OkwPAEunVVA",
+  "cover": ["take_a_look-cover_sq"]
+}

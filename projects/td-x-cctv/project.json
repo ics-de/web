@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "gestures/x cctv - TouchDesigner",
+  "date": "2025-03-19",
+  "client": "Personal",
+  "tags": ["vs"],
+  "subheader": {
+    "en": "TouchDesigner experiments",
+    "es": "TouchDesigner experiments",
+    "ca": "TouchDesigner experiments"
+  },
+  "text": {
+    "en": [
+      "\"x cctv\" revolves around the idea of giving the individual the power to directly control their own privacy. what if we had the ability to censor our own identity from surveillance cameras with the move of a finger, literally? the project aims to be a critic of mass surveillance, loss of  the user’s control over their own identity when choosing to partake in social media. at the same time, it mocks the excessive extravagant trends in the TouchDesigner community in which hand gestures are used to control abstract and often meaningless flamboyant visuals. flipping the middle finger acts as a teaser against the viewer and by using the pixelation effect some sort of a game of hide and seek is generated between the viewer and the artist.",
+      "\"gestures\" is a series of quick prototypes or experiments exploring the transformation of human gestures into digital interactions, generating a poetic dialog between input and output. they were all developed using Derivative TouchDesigner, mostly programmed in python and using the MediaPipe tools."
+    ],
+    "es": [
+      "\"x cctv\" gira en torno a la idea de dar al individuo el poder de controlar directamente su propia privacidad. ¿y si tuviéramos la capacidad de censurar nuestra propia identidad de las cámaras de vigilancia con el movimiento de un dedo, literalmente? el proyecto pretende ser una crítica a la vigilancia masiva, a la pérdida del control del usuario sobre su propia identidad al elegir participar en las redes sociales. al mismo tiempo, se burla de las tendencias extravagantes y excesivas en la comunidad TouchDesigner, en las que los gestos de la mano se utilizan para controlar visuales abstractos y, a menudo, sin sentido. levantar el dedo medio actúa como un teaser contra el espectador y, al utilizar el efecto de pixelación, se genera una especie de juego del escondite entre el espectador y el artista.",
+      "\"gestures\" es una serie de prototipos rápidos o experimentos que exploran la transformación de los gestos humanos en interacciones digitales, generando un diálogo poético entre entrada y salida. todos fueron desarrollados usando Derivative TouchDesigner, programados principalmente en python y utilizando las herramientas de MediaPipe."
+    ],
+    "ca": [
+      "\"x cctv\" gira en torno a la idea de donar al individu el poder de controlar directament la seva pròpia privacitat. ¿i si tinguéssim la capacitat de censurar la nostra pròpia identitat de les càmeres de vigilància amb el moviment d'un dit, literalment? el projecte pretén ser una crítica a la vigilància massiva, a la pèrdua del control de l'usuari sobre la seva pròpia identitat en triar participar en les xarxes socials. al mateix temps, es burla de les tendències extravagants i excesives en la comunitat TouchDesigner, en les quals els gestos de la mà s'utilitzen per controlar visuals abstractes i, sovint, sense sentit. alçar el dit del mig actua com un teaser contra el espectador i, utilitzant l'efecte de pixel·lació, es genera una espècie de joc del amagat entre el espectador i l'artista.",
+      "\"gestures\" és una sèrie de prototips ràpids o experiments que exploren la transformació dels gestos humans en interaccions digitals, generant un diàleg poètic entre entrada i sortida. tots van ser desenvolupats utilitzant Derivative TouchDesigner, programats principalment en python i utilitzant les eines de MediaPipe."
+    ]
+  },
+  "credits": [
+    {"role": "code", "name": "oriol colomer"}
+  ],
+  "url": "https://www.youtube.com/shorts/Rj2wXsGommQ",
+  "cover": ["x_cctv-cover_sq"]
+}

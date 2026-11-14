@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "Blanco Envidia @ Festival GREC – Ciutat & Carlos de Jacoba",
+  "date": "2026-07-01",
+  "client": "Ciutat",
+  "tags": ["lx","xy"],
+  "subheader": {
+    "en": "Lighting design & operation",
+    "es": "Diseño y operación de iluminación",
+    "ca": "Disseny i operació d'il·luminació"
+  },
+  "text": {
+    "en": [
+      "Lighting design and scenography for the presentation concert of «Blanco Envidia», an album by Ciutat and Carlos de Jacoba which combines flamenco with electronic music. Featured in Festival GREC 2026, the concert took place at Paral·lel 62 (Barcelona) and featured a live band."
+    ],
+    "es": [
+      "Diseño de iluminación y escenografía para el concierto de presentación de «Blanco Envidia», un álbum de Ciutat y Carlos de Jacoba que combina el flamenco con la música electrónica característica del dúo. El concierto se programó dentro del Festival GREC 2026 y tuvo lugar en Paral·lel 62 (Barcelona) y contó con una banda en directo."
+    ],
+    "ca": [
+      "Disseny d'il·luminació i escenografia pel concert de presentació de «Blanco Envidia», un àlbum de Ciutat i Carlos de Jacoba que combina el flamenc amb la música electrònica característica del duo. El concert es va programar dins del Festival GREC 2026 i va tenir lloc a Paral·lel 62 (Barcelona) i va comptar amb una banda en directe."
+    ]
+  },
+  "credits": [
+    {
+      "role": "lighting design & scenography",
+      "name": "oriol colomer & clàudia aguiló"
+    },
+    {
+      "role": "music",
+      "name": "Ciutat & Carlos de Jacoba"
+    },
+    {
+      "role": "music direction",
+      "name": "Juan Carmona"
+    },
+    {
+      "role": "label",
+      "name": "primavera labels"
+    }
+  ],
+  "cover": [
+    "1"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "gestures/i love you - TouchDesigner",
+  "date": "2025-04-23",
+  "client": "Personal",
+  "tags": ["vs"],
+  "subheader": {
+    "en": "TouchDesigner experiments",
+    "es": "TouchDesigner experiments",
+    "ca": "TouchDesigner experiments"
+  },
+  "text": {
+    "en": [
+      "\"i love you\" attempts to point out the diversity and cute deformity of the heart shapes we make with our hands. the use of wireframe render in red connects to the red thread theory and the hand games often played with red string.",
+      "\"gestures\" is a series of quick prototypes or experiments exploring the transformation of human gestures into digital interactions, generating a poetic dialog between input and output. they were all developed using Derivative TouchDesigner, mostly programmed in python and using the MediaPipe tools."
+    ],
+    "es": [
+      "\"i love you\" intenta señalar la diversidad y la deformidad mona de las formas de corazón que hacemos con nuestras manos. el uso del renderizado en alambre en rojo se conecta con la teoría del hilo rojo y los juegos de manos que a menudo se juegan con hilo rojo.",
+      "\"gestures\" es una serie de prototipos rápidos o experimentos que exploran la transformación de los gestos humanos en interacciones digitales, generando un diálogo poético entre entrada y salida. todos fueron desarrollados usando Derivative TouchDesigner, programados principalmente en python y utilizando las herramientas de MediaPipe."
+    ],
+    "ca": [
+      "\"i love you\" intenta assenyalar la diversitat i la deformitat mona de les formes de cor que fem amb les nostres mans. l'ús del renderitzat en filferro en vermell es connecta amb la teoria del fil vermell i els jocs de mans que sovint es juguen amb fil vermell.",
+      "\"gestures\" és una sèrie de prototips ràpids o experiments que exploren la transformació dels gestos humans en interaccions digitals, generant un diàleg poètic entre entrada i sortida. tots van ser desenvolupats utilitzant Derivative TouchDesigner, programats principalment en python i utilitzant les eines de MediaPipe."
+    ]
+  },
+  "credits": [
+    {"role": "code", "name": "oriol colomer"}
+  ],
+  "url": "https://www.youtube.com/shorts/FFzpCqI4U_Q",
+  "cover": ["i_love_you-cover_sq"]
+}
