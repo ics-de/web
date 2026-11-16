@@ -1,0 +1,83 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "silvestrecatapulta @ Sala Taro",
+  "date": "2025-10-24",
+  "client": "silvestrecatapulta",
+  "tags": ["vs"],
+  "subheader": {
+    "en": "Live interactive visuals",
+    "es": "Visuales interactivos en directo",
+    "ca": "Visuals interactius en directe"
+  },
+  "text": {
+    "en": [
+      "Live interactive visuals projected over silvestrecatapulta and his band during their concert at Sala Taro (Barcelona) on October 24th 2025. The visuals were programmed in Unity 6.0 and were played live by me during the entire show.",
+      "The concept behind the visuals was to develop a computer operative system based around the artist's universe, inspired on Terry A. Davis' TempleOS, with each song having a representative icon and in a retro desktop through which I'd navigate to launch visuals and interact with them in real time."
+    ],
+    "es": [
+      "Visuales interactivas en directo proyectados sobre silvestrecatapulta y su banda durante su concierto en Sala Taro (Barcelona) el 24 de octubre de 2025. Los visuales fueron programados en Unity 6.0 y fueron reproducidos en vivo por mí durante todo el show.",
+      "El concepto detrás de los visuales era desarrollar un sistema operativo informático basado en el universo del artista, inspirado en TempleOS de Terry A. Davis, con cada canción teniendo un icono representativo y en un escritorio retro a través del cual navegaría para lanzar visuales e interactuar con ellos en tiempo real."
+    ],
+    "ca": [
+      "Visuals interactius en directe projectats sobre silvestrecatapulta i la seva banda durant el seu concert a Sala Taro (Barcelona) el 24 d'octubre de 2025. Els visuals van ser programats en Unity 6.0 i van ser reproduïts en viu per mi durant tot l'espectacle.",
+      "El concepte darrere dels visuals era desenvolupar un sistema operatiu informàtic basat en l'univers de l'artista, inspirat en TempleOS de Terry A. Davis, amb cada cançó tenint una icona representativa i en un escriptori retro a través del qual navegaria per llançar visuals i interactuar amb ells en temps real."
+    ]
+  },
+  "credits": [
+    {
+      "role": "visuals",
+      "name": "oriol colomer"
+    },
+    {
+      "role": "music",
+      "name": "silvestrecatapulta (miquel aguiló)"
+    },
+    {
+      "role": "keyboards",
+      "name": "èlia lucas"
+    },
+    {
+      "role": "drums",
+      "name": "joan vallbona"
+    },
+    {
+      "role": "bass",
+      "name": "biel riera"
+    },
+    {
+      "role": "sound engineer",
+      "name": "toni gelabert"
+    },
+    {
+      "role": "soprano",
+      "name": "cèlia cuéllar"
+    },
+    {
+      "role": "co-producer",
+      "name": "dude alves"
+    },
+    {
+      "role": "noise",
+      "name": "joan torné"
+    },
+    {
+      "role": "tech production",
+      "name": "pol magdaleno"
+    },
+    {
+      "role": "lighting",
+      "name": "helena mateos"
+    },
+    {
+      "role": "photos xigala",
+      "name": "júlia vives"
+    },
+    {
+      "role": "live photos",
+      "name": "abril ballabriga"
+    }
+  ],
+  "cover": [
+    "1"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "Jimena Amarillo @ Razzmatazz 2",
+  "date": "2025-11-21",
+  "client": "Jimena Amarillo",
+  "tags": ["lx"],
+  "subheader": {
+    "en": "Lighting design & operation",
+    "es": "Diseño y operación de iluminación",
+    "ca": "Disseny i operació de llum"
+  },
+  "text": {
+    "en": [
+      "Live concert lighting design and operation together with Clàudia Aguiló for Jimena Amarillo's concert in Razzmatazz 2 (Barcelona) on November 21st."
+      ],
+    "es": [
+      "Diseño y operación de iluminación en directo para el concierto de Jimena Amarillo en Razzmatazz 2 (Barcelona) el 21 de noviembre de 2025. La iluminación fue diseñada y operada en conjunto con Clàudia Aguiló."
+    ],
+    "ca": [
+      "Disseny i operació de llum en directe per al concert de Jimena Amarillo a Razzmatazz 2 (Barcelona) el 21 de novembre de 2025. La llum va ser dissenyada i operada en conjunt amb Clàudia Aguiló."
+    ]
+  },
+  "credits": [
+    {
+      "role": "lighting design & operation",
+      "name": "oriol colomer & clàudia aguiló"
+    },
+    {
+      "role": "music",
+      "name": "Jimena Amarillo"
+    }
+  ],
+  "cover": [
+    "1"
+  ]
+}

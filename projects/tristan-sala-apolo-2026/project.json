@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "Sala Apolo [2] – TRISTÁN!",
+  "date": "2026-02-19",
+  "client": "TRISTÁN!",
+  "tags": ["lx", "xy"],
+  "subheader": {
+    "en": "Lighting design & operation",
+    "es": "Diseño y operación de iluminación",
+    "ca": "Disseny i operació d'il·luminació"
+  },
+  "text": {
+    "en": [
+      "Lighting design and live operation for Tristán's shows both in Sala Copérnico (Madrid, 12/02) and Sala Apolo 2 (Barcelona, 19/02), for his new album tour with the Jazz Band Air. Done together with Clàudia Aguiló.",
+      "Our proposal consisted of a few lighting techniques that would interact with both musicians and the scenography present on stage: The most distinctive element of the show's lighting is a search light like the ones used in opera concerts. This light would be revealed a few songs into the concert. We made use of the light's mechanical parameters such as intensity, movement, iris aperture, zoom and strobe to give personality to the show. By using it we'd guide the crowd's focus onto the relevant moments or subjects for each part of the show. By casting light on the translucent curtain between the band and the audience, we'd occlude everything that was behind it. This meant leaving Tristán on first term with the band suddenly gone. We could then illuminate them from behind to make them appear."
+    ],
+    "es": [
+      "Diseño de iluminación y operación en directo para los shows de Tristán tanto en Sala Copérnico (Madrid, 12/02) como en Sala Apolo 2 (Barcelona, 19/02), para su gira de su nuevo álbum con la Jazz Band Air. Realizado junto a Clàudia Aguiló.",
+      "Nuestra propuesta consistió en unas cuantas técnicas de iluminación que interactuarían con los músicos y la escenografía presente en el escenario: El elemento más distintivo de la iluminación del show es un foco como los que se usan en conciertos de ópera. Este foco se revelaría unas cuantas canciones después de empezar el concierto. Hicimos uso de los parámetros mecánicos del foco como intensidad, movimiento, apertura del iris, zoom y strobe para darle personalidad al show. Usándolo guiaríamos la atención del público hacia los momentos o sujetos relevantes para cada parte del show. Al proyectar luz sobre la cortina translúcida entre la banda y el público, ocultaríamos todo lo que estaba detrás de ella. Esto significaba dejar a Tristán en primer plano con la banda desaparecida de repente. Podríamos entonces iluminarlos desde atrás para hacerlos aparecer."
+    ],
+    "ca": [
+      "Disseny d'il·luminació i operació en directe per als shows de Tristán tant a Sala Copérnico (Madrid, 12/02) com a Sala Apolo 2 (Barcelona, 19/02), per a la seva gira del seu nou àlbum amb la Jazz Band Air. Realitzat juntament amb Clàudia Aguiló.",
+      "La nostra proposta va consistir en unes quantes tècniques d'il·luminació que interactuarien amb els músics i l'escenografia present a l'escenari: L'element més distintiu de la il·luminació del show és un focus com els que s'utilitzen en concerts d'òpera. Aquest focus es revelaria unes quantes cançons després de començar el concert. Vam fer ús dels paràmetres mecànics del focus com intensitat, moviment, obertura de l'iris, zoom i strobe per donar-li personalitat al show. Usant-lo guiaríem l'atenció del públic cap als moments o subjectes rellevants per a cada part del show. En projectar llum sobre la cortina translúcida entre la banda i el públic, ocultaríem tot el que estava darrere d'ella. Això significava deixar Tristán en primer pla amb la banda desapareguda de sobte. Podríem llavors il·luminar-los des de darrere per fer-los aparèixer."
+    ]
+  },
+  "credits": [
+    {
+      "role": "lighting design",
+      "name": "oriol colomer & clàudia aguiló"
+    },
+    {
+      "role": "music",
+      "name": "TRISTÁN!"
+    }
+  ],
+  "cover": [
+    "1"
+  ]
+}
