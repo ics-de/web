@@ -15,7 +15,7 @@
     "https://www.linkedin.com/in/oriolcolomerdelgado/"
   ],
   "autoEnter": 8000,
-  "tunnel": { "card": 42, "cardMobile": 76 },
+  "tunnel": { "card": 48, "cardMobile": 76 },
   "tagline": {
     "en": "lighting design, visuals and creative direction. barcelona.",
     "es": "diseño de iluminación, visuales y dirección creativa. barcelona.",
@@ -39,6 +39,7 @@
         "jimena-amarillo-razzmatazz-2025",
         "silvestrecatapulta-visuals",
         "lechatelier-sala-apolo-2025",
+        "080-beyondcrafts",
         "allergiques-mmvv-2025",
         "td-take-a-look",
         "td-framed",
@@ -50,7 +51,8 @@
         "td-x-cctv",
         "amore-razzmatazz-2",
         "gradients",
-        "2025-carles-castano"
+        "2025-carles-castano",
+        "uri-garrell-the-opposite"
       ]
     },
     "lab": {

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "The Opposite - Uri Garrell",
+  "date": "2024-09-03",
+  "client": "Uri Garrell",
+  "tags": ["vs", "dc"],
+  "subheader": {
+    "en": "Visuals design & animation",
+    "es": "Diseño de visuales y realización de animación",
+    "ca": "Disseny de visuals i realització de animació"
+  },
+  "text": {
+    "en": [
+      "Conceptualization and development of the music video for Uri Garrell's cover of The Opposite - Hayley Reardon. 2.5D animation made from digitalized hand-made drawings by Tània Renau and later composed together in Blender."
+    ],
+    "es": [
+      "Conceptualización y desarrollo del videoclip para la cover de Uri Garrell de The Opposite - Hayley Reardon. Animación 2.5D realizada a partir de dibujos hechos a mano por Tània Renau, posteriormente digitalizados y compuestos en Blender."
+    ],
+    "ca": [
+      "Conceptualització i desenvolupament del videoclip per a la cover de Uri Garrell de The Opposite - Hayley Reardon. Animació 2.5D realitzada a partir de dibuixos fets a mà per Tània Renau, posteriorment digitalitzats i composats a Blender."
+    ]
+  },
+  "credits": [
+    {"role": "visuals design & animation", "name": "oriol colomer"},
+    {"role": "hand-made drawings", "name": "tània renau"},
+    {"role": "music", "name": "uri garrell"}
+  ],
+  "cover": ["1"],
+  "url": "https://www.instagram.com/reel/C_drXnaP_kw/"
+}

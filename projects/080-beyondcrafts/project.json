@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "080_BEYONDCRAFTS",
+  "date": "2025-10-14",
+  "client": "Artesania de Catalunya",
+  "tags": ["vs"],
+  "subheader": {
+    "en": "Artesania de Catalunya x 080 Barcelona Fashion",
+    "es": "Artesania de Catalunya x 080 Barcelona Fashion",
+    "ca": "Artesania de Catalunya x 080 Barcelona Fashion"
+  },
+  "text": {
+    "en": [
+      "3D visuals and video coordination for the 080_BEYONDCRAFTS installation during the 080 Barcelona Fashion week, which consisted of multiple stands for designer made hats. The visuals were designed to accompany each of the pieces present in the stands. I developed 3D visuals for Javier Guijarro's La Gran Boina (2023) and Nico Alonso's Memory of a Sailor’s Hat (2025) The visuals",
+      "La Gran Boina - Javier Guijarro (2023)",
+      "In the visuals for this piece I attempted to capture both the particular texture of its material and the natural silhouette of its shape, which is both organic and very mathematical at the same time. Its asymmetric silhouette elongated frontwards casts a deep shadow on the face, which makes the piece seem contemporary and experimental. The creative process starts out from a felt cloche, which is then shaped by hand until it matches the shape of the mould. Once dry and set, the finishes on the cut are made and then ironed to achieve the stiffness and clean-cut lines of the volume. The result is a piece that fuses traditional hat-making techniques and a modern sculptural design.",
+      "Memory of a Sailor’s Hat - Nico Alonso (2025)",
+      "For this instance, the focus was in generating new compositions from the original components of the hat and isolating each part of the piece to examine it in close-up detail. The piece is inspired by traditional sailors’ hats. Its simple silhouette is highlighted by the red interior and ribbons on the side that prolong the idea of a coastline and memories of travel. Made of lambskin leather, it retains the grandeur of the material and the sobriety of sailors’ attire, which here has been transformed into an object laden with theatricality and poetry."
+    ],
+    "es": [
+      "Visuales 3D y coordinación de vídeo para la instalación 080_BEYONDCRAFTS durante la 080 Barcelona Fashion week, que consistió en múltiples stands para sombreros de diseñador. Los visuales fueron diseñados para acompañar cada una de las piezas presentes en los stands. Desarrollé visuales 3D para La Gran Boina (2023) de Javier Guijarro y Memory of a Sailor’s Hat (2025) de Nico Alonso.",
+      "La Gran Boina - Javier Guijarro (2023)",
+      "En los visuales para esta pieza intenté capturar tanto la textura particular de su material como la silueta natural de su forma, que es a la vez orgánica y muy matemática. Su silueta asimétrica alargada hacia adelante proyecta una sombra profunda en el rostro, lo que hace que la pieza parezca contemporánea y experimental. El proceso creativo comienza a partir de un cloche de fieltro, que luego se moldea a mano hasta que coincide con la forma del molde. Una vez seco y fijado, se realizan los acabados en el corte y luego se plancha para lograr la rigidez y las líneas limpias del volumen. El resultado es una pieza que fusiona técnicas tradicionales de sombrerería y un diseño escultórico moderno.",
+      "Memory of a Sailor’s Hat - Nico Alonso (2025)",
+      "En este caso, el enfoque estaba en generar nuevas composiciones a partir de los componentes originales del sombrero y aislar cada parte de la pieza para examinarla en detalle de cerca. La pieza está inspirada en los sombreros tradicionales de los marineros. Su silueta simple se destaca por el interior rojo y las cintas a los lados que prolongan la idea de una costa y recuerdos de viajes. Hecho de cuero de cordero, conserva la grandeza del material y la sobriedad del atuendo de los marineros, que aquí se ha transformado en un objeto cargado de teatralidad y poesía."
+    ],
+    "ca": [
+      "Visuals 3D i coordinació de vídeo per a la instal·lació 080_BEYONDCRAFTS durant la 080 Barcelona Fashion week, que consistí en múltiples stands per a barrets de dissenyador. Els visuals foren dissenyats per acompanyar cada una de les peces presents als stands. Desenvolupí visuals 3D per a La Gran Boina (2023) de Javier Guijarro i Memory of a Sailor’s Hat (2025) de Nico Alonso.",
+      "La Gran Boina - Javier Guijarro (2023)",
+      "En els visuals per a aquesta peça he intentat capturar tant la textura particular del seu material com la silueta natural de la seva forma, que és alhora orgànica i molt matemàtica. La seva silueta asimètrica allargada cap endavant projecta una ombra profunda en el rostre, cosa que fa que la peça sembli contemporània i experimental. El procés creatiu comença a partir d'un cloche de feltre, que després es moldeja a mà fins que coincideix amb la forma del molde. Un cop sec i fixat, es realitzen els acabats en el tall i després es planxa per aconseguir la rígidesa i les línies netes del volum. El resultat és una peça que fusiona tècniques tradicionals de sombrereria i un disseny escultòric modern.",
+      "Memory of a Sailor’s Hat - Nico Alonso (2025)",
+      "En aquest cas, l'enfocament estava en generar noves composicions a partir dels components originals del barret i aïllar cada part de la peça per examinar-la en detall de prop. La peça està inspirada en els barrets tradicionals dels mariners. La seva silueta simple es destaca per l'interior vermell i les cintes als costats que prolonguen la idea d'una costa i records de viatges. Fet de cuir d'ovella, conserva la grandesa del material i la sobrietat de l'atrezzo dels mariners, que aquí s'ha transformat en un objecte carregat de teatralitat i poesia."
+    ]
+  },
+  "credits": [
+    {"role": "creative director & digital artist", "name": "@guillermo.solas"},
+    {"role": "producer", "name": "@paugeis"},
+    {"role": "display designer", "name": "@martagutierrz"},
+    {"role": "video coordinator & digital artist", "name": "@oriolonbass"},
+    {"role": "digital artist", "name": "@mimitos.online"},
+    {"role": "sound design & Engineer", "name": "@quieebra"}
+  ],
+  "cover": ["1"]
+}
