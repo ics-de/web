@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "Al·lèrgiques al Pol·len @ Mercat de Música Viva de Vic",
+  "date": "2025-09-20",
+  "client": "Al·lèrgiques al Pol·len",
+  "tags": ["vs", "dc"],
+  "subheader": {
+    "en": "Visuals design & live video operation",
+    "es": "Diseño de visuales y realización de vídeo en directo",
+    "ca": "Disseny de visuals i realització de vídeo en directe"
+  },
+  "text": {
+    "en": [
+      "Visuals design and live video operation & production for Al·lèrgiques al Pol·len's concert at Mercat de Música Viva de Vic on September 20th 2025. The project involved creating minimalist visuals to accompany the band's show through the use of colour flashes and synchronized lyrics appearing on screen."
+    ],
+    "es": [
+      "Diseño de visuales y operación y realización de vídeo en directo para el concierto de Al·lèrgiques al Pol·len en el Mercat de Música Viva de Vic el 20 de septiembre de 2025. El proyecto consistió en crear visuales minimalistas que acompañaran el espectáculo de la banda mediante destellos de color y letras sincronizadas que aparecían en pantalla."
+    ],
+    "ca": [
+      "Disseny de visuals i operació i realització de vídeo en directe per al concert d'Al·lèrgiques al Pol·len al Mercat de Música Viva de Vic el 20 de setembre de 2025. El projecte consistí a crear visuals minimalistes que acompanyessin l'espectacle del grup mitjançant flaixos de color i lletres sincronitzades que apareixien a la pantalla."
+    ]
+  },
+  "credits": [
+    {"role": "visuals design", "name": "oriol colomer"},
+    {"role": "live video operation & production", "name": "oriol colomer"},
+    {"role": "camera operator", "name": "macari de golferichs"}
+  ],
+  "cover": ["4"]
+}
